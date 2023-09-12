@@ -1,0 +1,284 @@
+{% include "header.html" %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index2.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://fontawesome.com/v4/icon/sign-out">
+
+<link rel="stylesheet" href="https://fontawesome.com/icons/unlock-alt?f=classic&s=solid">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/side.js') }}"></script> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        #mySidenav {
+            display: none; /* Initially hide the menu */
+        }
+    </style>
+
+</head>
+<body>
+   
+    <div id="menuContainer">
+        <span style="font-size: 30px; cursor: pointer; color: white; width: 184px; top: 64px; position: fixed;" onclick="openNav()">&#9776;MENU</span>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a  data-toggle="modal" data-target="#insertModal">Insert</a>
+            <a href="{{ url_for('vehicle_history') }}">Vehicle History</a>
+            <a href="#">Services</a>
+            <strong>{{ session.name }}</strong><a href="{{ url_for('logout') }}"><i class="i class= fas fa-sign-out-alt" style="position: absolute; bottom: 10px; font-size: 25px;">Logout</i></a>
+        </div>
+    </div>
+
+ <!-- JavaScript to toggle menu visibility -->
+ <script>
+    function openNav() {
+        var sidenav = document.getElementById("mySidenav");
+        sidenav.style.display = "block";
+    }
+
+    function closeNav() {
+        var sidenav = document.getElementById("mySidenav");
+        sidenav.style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        closeNav(); // Hide the menu initially
+        var menuButton = document.querySelector("#menuContainer span");
+        menuButton.addEventListener("click", function () {
+            openNav(); // Show the menu when the "MENU" button is clicked
+        });
+    });
+</script>
+
+
+
+<div class="container">
+    <h1 style="font-size: 1.75rem; font-weight: 700; text-align: center;">Admin Profile</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <form method="GET" action="{{ url_for('search_users') }}">
+                <div class="input-group search-bar">
+                    <input type="text" class="form-control" name="search_name" placeholder="Search By Name...." value="{{ search_name }}">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"style="font-size:24px"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+         
+            <div class="row">
+            </div>
+            <br>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <!-- Flash messages display -->
+            <div class="alert alert-success alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- Table of Users -->
+            <table class="table table-striped">
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Password</th>
+                    <th>Department</th>
+                    <th>User Type</th>
+                    <th>Vehicle Type</th>
+                    <th>Vehicle Number</th>
+                    <th>Total Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                {% for row in users %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    <td>{{ row[10] }}</td>
+                    <td>{{ row[11] }}</td>
+                    <td>
+                        {% if row[11] == 'pending' %}
+                        <a href="{{ url_for('approve', userid=row[0]) }}">Approve</a>
+                        <a href="{{ url_for('reject', userid=row[0]) }}">Reject</a>
+                        {% endif %}
+                        {% if row[11] == 'INACTIVE' %}
+                        <a href="{{ url_for('approve', userid=row[0]) }}">Approve</a>
+                        {% endif %}
+                        <a href="{{ url_for('deactivate_user', userid=row[0]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash"style='font: size 24px'></i> DEL</button>
+                        </i></a>
+
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modaledit{{ row[0] }}"><i class="button-74"><i class="fa fa-edit"style='font: size 24px'></i> edit</button>
+
+                    </td>
+                    
+                </tr>
+                <div id="modaledit{{ row[0] }}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body"style="background-color: slategrey;">
+
+                                <form action="{{ url_for('update') }}" method="POST">
+                                    <div class="input-group">
+                                        <label>Name:</label>
+                                        <input type="hidden" name="userid" value="{{ row[0] }}">
+                                        <input type="text" class="form-control" name="name" value="{{ row[1] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Email:</label>
+                                        <input type="text" class="form-control" name="email" value="{{ row[2] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Phone Number:</label>
+                                        <input type="text" class="form-control" name="phone_number" value="{{ row[3] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Department:</label>
+                                        <input type="text" class="form-control" name="department" value="{{ row[5] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>User Type:</label>
+                                        <input type="text" class="form-control" name="user_type" value="{{ row[6] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Vehicle Type:</label>
+                                        <input type="text" class="form-control" name="vehicle_type" value="{{ row[7] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Vehicle Number:</label>
+                                        <input type="text" class="form-control" name="vehicle_number" value="{{ row[8] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Total Amount:</label>
+                                        <input type="text" class="form-control" name="total_amt" value="{{ row[9] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Date:</label>
+                                        <input type="text" class="form-control" name="date" value="{{ row[10] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Status:</label>
+                                        <input type="text" class="form-control" name="status" value="{{ row[11] }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- Modal footer content can be added here if needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Insert Modal -->
+<div class="modal fade" id="insertModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Insert User Information</h4>
+            </div>
+            <div class="modal-body"style="background-color: slategrey;">
+
+                <form action="{{ url_for('insert') }}" method="POST">
+                    <div class="input-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter name">
+                    </div>
+                    <div class="input-group">
+                        <label>Email:</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter email">
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Number:</label>
+                        <input type="tel" class="form-control" name="phone_number" placeholder="Enter phone number">
+                    </div>
+                    <div class="input-group">
+                        <label>Password:</label>
+                        <input type="password" class="form-control" name="password" placeholder="Enter password">
+                    </div>
+                    <div class="input-group">
+                        <label>Department:</label>
+                        <select class="form-control" name="department">
+                            <option value="mcs.ca">MCS (CA)</option>
+                            <option value="mcs.cs">MCS (CS)</option>
+                            <option value="datascience">Data Science</option>
+                            <option value="computer science">Computer Science</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>User Type:</label>
+                        <select class="form-control" name="user_type">
+                            <option value="student">STUDENT</option>
+                            <option value="admin">ADMIN</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Vehicle Number:</label>
+                        <input type="text" class="form-control" name="vehicle_number" placeholder="Enter vehicle number">
+                    </div>
+                    <div class="input-group">
+                        <label>Vehicle Type:</label>
+                        <select class="form-control" name="vehicle_type">
+                            <option value="TwoWheeler">Two Wheeler</option>
+                            <option value="FourWheeler">Four Wheeler</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <button class="btn btn-primary" type="submit">Insert</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- Modal footer content can be added here if needed -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+{% include "footer.html" %}

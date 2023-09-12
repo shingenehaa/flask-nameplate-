@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle History</title>
+    <a href="#" onclick="goBack()" class="back-button">Back</a> <!-- Add the Back button with the "back-button" class -->
+
+
+        <!-- Other meta tags and title -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/vehicle_history.css') }}">
+        
+    
+    <!-- Include any necessary CSS or styling here -->
+</head>
+<body>
+    <h1>Vehicle History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>Vehicle Number</th>
+                <th>Vehicle Type</th>
+                <th>DATE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in vehicle_history_data %}
+            <tr>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+                <td>{{ entry[3] }}</td>
+                <td>
+                    {% if entry[0] %}
+                        {{ entry[0].strftime('%d %B %Y %I:%M %p') }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function goBack() {
+            window.history.back(); // This will navigate back to the previous page
+        }
+    </script>
+    <!-- Add any additional content or styling here -->
+</body>
+</html>
+
+

@@ -1,0 +1,223 @@
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user.css') }}">
+    <script src="{{ url_for('static', filename='js/side.js') }}"></script> 
+
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+    <script>
+        function openNav() {
+            var menu = document.getElementById("mySidenav");
+            if (menu.style.display === "none" || menu.style.display === "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        function closeNav() {
+            var menu = document.getElementById("mySidenav");
+            menu.style.display = "none";
+        }
+    </script>
+
+
+</head>
+<body>
+    <div class="main">
+        <span style="font-size: 30px;
+        cursor: pointer;
+        color: rgb(254, 252, 252);
+        top: 64px;
+        position: inherit;" onclick="openNav()">&#9776;MENU</span>
+      
+      </div>
+      <div id="mySidenav" class="sidenav" style="top: 64px; display: none;">
+        <a href="{{ url_for('payment') }}">Make Payment</a>
+        <a href="{{ url_for('transactions') }}">Transactions</a>
+        <div class="contact-dropdown" style="font-size: 25px;
+        color: #818181;">
+              <li class="dropdown" style="list-style: none;"><a href="#"><span>Contact</span></i></a>       
+                <ul>
+                    <li class="dropdown"; style="list-style: none;"> <i class="fa fa-envelope" style="font-size:24px;">
+                        <a href="mailto: nehashinge74@gmail.com">nehashinge74@gmail.com</a></i>
+                      <li class="dropdown" style="list-style: none;"><i class="fa fa-phone" style="font-size:24px; ">
+                        <a href="tel: 9970570154">9970570154</a></i>
+                      </li>
+                    </li>
+                  </ul>
+                </li>
+        </div>
+
+        <strong>{{ session.name }}<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt" style="position: absolute; bottom: 10px; font-size: 25px;">Logout</i></a></strong>
+        <div class="row2">
+        
+        </div>
+        
+
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+      </div>
+      
+    <div class="container">
+        <h1>User Profile</h1>
+        <form action="{{url_for('login')}}" method="post">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" role="alert" style="color: white;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+
+       
+        
+
+      
+
+        <div class="user-details">
+            <!-- User details data here -->
+            <h3 style="color: rgb(0, 0, 0);padding: 0px 7px;align-content: center;align-items: center;position: inherit;top: 184px;"> YOUR CURRENT BALENCE IS : {{ users[0].total_amt }}rs</h3>
+        </div>
+        
+
+
+
+        <!-- Display user in/out status from log_table -->
+<div class="user-log">
+    <h3>User In/Out Status</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Entry Date</th>
+                <th>Exit Date</th>
+                <th>Vehicle Type</th>
+                <th>Deductions </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in user_logs %}
+                <tr>
+                    <td>
+                        {% if log.entry_date %}
+                            {{ log.entry_date.strftime('%d %B %Y %I:%M %p') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if log.exit_date %}
+                            {{ log.exit_date.strftime('%d %B %Y %I:%M %p') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{{ log.vehicle_type }}</td>
+                    <td>{{ log.deductions }}Rs</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+      
+</body>
+</html>
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!--  <div class="user-detail">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col md-12">
+                            <div class="user-details">
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>User ID:</strong></div>
+                                    <div class="value">{{ users[0].userid }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Name:</strong></div>
+                                    <div class="value">{{ users[0].name }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Email:</strong></div>
+                                    <div class="value">{{ users[0].email }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Phone Number:</strong></div>
+                                    <div class="value">{{ users[0].phone_number }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Department:</strong></div>
+                                    <div class="value">{{ users[0].department }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>User Type:</strong></div>
+                                    <div class="value">{{ users[0].user_type }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Vehicle Type:</strong></div>
+                                    <div class="value">{{ users[0].vehicle_type }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Vehicle Number:</strong></div>
+                                    <div class="value">{{ users[0].vehicle_number }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Total Amount:</strong></div>
+                                    <div class="value">{{ users[0].total_amt }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Date:</strong></div>
+                                    <div class="value">{{ users[0].date }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Status:</strong></div>
+                                    <div class="value">{{ users[0].status }}</div>
+
+                                    
+                                    
+                                    
+            </div>
+         Add other user details here
+
+        </div>-->
+

@@ -1,0 +1,34 @@
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Inside transactions.html -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/transactions.css') }}">
+
+    <title>Transactions</title>
+</head>
+<body>
+    <h1>Your Transactions</h1>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>UPI ID</th>
+            <th>Payment Method</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+           <td>{{ transaction[5].strftime("%d %B %Y %I:%M %p") }}</td> 
+            <td>Rs{{ transaction[2] }}</td>
+            <td>{{ transaction[3] }}</td>
+            <td>{{ transaction[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="login-button2">
+        <a href="{{ url_for ( 'user' ) }}">Back</a>
+    </div>
+</body>
+</html>
+{% include 'footer.html' %}
