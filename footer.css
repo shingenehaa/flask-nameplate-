@@ -1,0 +1,32 @@
+/* Footer */
+footer{
+  position: fixed;
+  bottom: 0px;
+  background-color: #222520;
+  color: #fff;
+  text-align: center;
+  padding: 8px 0;
+  width:100%;
+  margin: 0px;
+  left: 0px;
+  
+
+  
+}
+
+footer ul{
+  list-style:none;
+}
+
+footer ul li{
+  float:left;
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+footer .company-rights{
+  text-align: right;
+  position: relative;
+  right: 20px;
+}
+

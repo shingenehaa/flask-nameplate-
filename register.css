@@ -1,0 +1,121 @@
+/* Registration Form */
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.freepik.com/premium-vector/cars-parking-lot-parking-tickets-public-car-park-flat-illustration-web-urban-transport-large-number-cars-crowded-parking_589019-726.jpg?w=1380');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0; /* Set initial opacity */
+    animation: zoomIn 5s ease-in-out 1; /* Apply the animation */
+    top: 80px;
+
+    
+}
+.zoom-in {
+    animation: zoomIn 2s ease-in-out forwards; /* Play animation and maintain final state */
+}
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5); /* Initial scale */
+    }
+    100% {
+        opacity: 100;
+        transform: scale(1); /* Zoom out effect */
+    }
+}
+
+.registration {
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.1);
+    border: 5px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #bab9b9;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    opacity: 100%; /* Initially hidden */
+    transform: scale(0.8); /* Initial scale */
+    transition: opacity 1s, transform 1s;
+    
+}
+
+
+.registration h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.registration p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.registration form {
+    text-align: left;
+
+}
+
+.registration label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.registration input {
+    width: 100%;
+    border: 2px solid #e7e7e7;
+    font-size: 1.2rem;
+    font-style: inherit;
+    border-radius: 0px;
+    outline: none;
+    transition: .3s;
+    color: #111;
+    height: 50px;
+    padding: 5px 5px;
+    margin-bottom: 10px !important;
+    border: 1px solid #ccc;
+    border-radius: 8px;   
+    
+}
+
+.registration button {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.registration button:hover {
+    background-color: #ff5500;
+}
+select{
+    width: 100%;
+    border: 2px solid #e7e7e7;
+    font-size: 1.2rem;
+    font-style: inherit;
+    border-radius: 0px;
+    background-color: #f2f4f8;
+    outline: none;
+    transition: .3s;
+    color: #111;
+    height: 50px;
+    padding: 5px 5px;
+    margin-bottom: 10px !important;
+    border: 1px solid #ccc;
+    border-radius: 5px;   
+
+}
+

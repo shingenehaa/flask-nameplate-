@@ -1,0 +1,79 @@
+/* styles.css */
+body{
+background-image: url(https://getpaidstock.com/tmp/[GetPaidStock.com]-64dde3d225b92.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed; /* Ensures the background remains fixed */
+color: white; 
+margin:0%;
+left: 0%;
+
+}
+
+.container {
+  color: black;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(196, 130, 130, 0.1);
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  height: 350px;
+  width: 290px;
+}
+.login-form {
+  background-color: #e99f9f;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+}
+.col-md-9{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 20px;
+      color: rgb(0, 0, 0); /* Set text color to be visible against the background */
+  }
+
+
+.col-md-3-content {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 50px;
+}
+
+.form-control {
+  display: block;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  width: auto;
+  
+}
+
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}

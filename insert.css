@@ -1,0 +1,145 @@
+
+.modal-content {
+    position: absolute;
+    width: 500px;
+    max-height: max-content;
+    border-radius: 36px;
+    box-shadow: 0 0 0px rgb(120 46 46 / 30%);
+    padding: 0px 42px;
+    background: fixed;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px #b6b6b6;
+    margin: 0 auto;
+    top: 5%;
+    position: relative;
+    
+    }
+    select {
+      width: 100%;
+      height: 100%; 
+      border: 2px solid #e7e7e7;
+      padding: 4px 4px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      background-color: #f2f4f8;  
+      transition: .3s;
+      margin-bottom: 20px;
+      /* padding-right: 40px; */
+    
+      }
+    .modal-content .login-text {
+      color: #111;
+      font-weight: 500;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 20px;
+      display:flex;
+      text-transform: capitalize;
+      align-items: end;
+    }
+    .container .login-social {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+      margin-bottom: 25px;
+    }
+    .input-group > .form-control,
+    .input-group > .form-control-plaintext {
+      position: relative;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      width: 1%;
+      min-width: 0;
+      margin-bottom: 0;
+      border-radius: 38px;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .modal-body.input-group input {
+      width: 100%;
+      border: 2px solid #e7e7e7;
+      padding: 4px 4px;
+      font-size: 1.2rem;
+      font-style: inherit;
+      border-radius: 30px;
+      background-color: #f2f4f8;
+      outline: none;
+      transition: .3s;
+      color: #111;
+      height: 50px;
+      padding: 12px;
+    }
+    
+    .modal-body.btn {
+    display: block;
+    width: 100%;
+    padding-top: 10%;
+    padding: 15px 18px;
+    text-align: center;
+    border: none;
+    background: #847e7e;
+        outline: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    color: #FFF;
+    cursor: pointer;
+    transition: .3s;
+    }
+    
+    .modal-body.btn:hover {
+      transform: translateY(-10px);
+      background: #000000;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 4px;
+      padding: 2px;
+    }
+    
+    a,
+    a:visited,
+    a:focus,
+    a:active,
+    a:link {
+      text-decoration: none;
+      outline: 0;
+    }
+    /* code for the spaces between boxes*/
+    .container .input-group {
+      width: 100%;
+      height: 50px;
+      margin-bottom: 25px;
+    }
+    .container .login-email .input-group input {
+      width: 100%;
+      border: 2px solid #e7e7e7;
+      padding: 4px 4px;
+      font-size: 1.2rem;
+      font-style: inherit;
+      border-radius: 30px;
+      background-color: #f2f4f8;
+      outline: none;
+      transition: .3s;
+      color: #111;
+      height: 50px;
+      padding: 12px;
+    
+    }
+    .input[type="file" i] 
+    {
+     appearance: none;
+     background-color: initial;
+     cursor: default;
+     align-items: baseline;
+     color: inherit;
+     text-overflow: ellipsis;
+     white-space: pre;
+     text-align: start !important;
+     padding: initial;
+     border: initial;
+     overflow: hidden !important;
+    
+    
+    }
+    
